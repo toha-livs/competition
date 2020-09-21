@@ -1,0 +1,250 @@
+{% if counter == 1 %}
+    <div class="col-12 medal gold p-2">
+        <div class="mrow">
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-12 p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             x="0px" y="0px"
+                             width="30" height="30"
+                             viewBox="0 0 172 172"
+                             style=" fill:#000000;">
+                            <g fill="none" fill-rule="nonzero"
+                               stroke="none" stroke-width="1"
+                               stroke-linecap="butt"
+                               stroke-linejoin="miter"
+                               stroke-miterlimit="10"
+                               stroke-dasharray=""
+                               stroke-dashoffset="0"
+                               font-family="none" font-weight="none"
+                               font-size="none" text-anchor="none"
+                               style="mix-blend-mode: normal">
+                                <path d="M0,172v-172h172v172z"
+                                      fill="none"></path>
+                                <g>
+                                    <path d="M74.4588,83.85l-36.6618,-77.4h25.3485l36.9499,77.4z"
+                                          fill="#b6dcfe"></path>
+                                    <path d="M61.7867,8.6l34.9031,73.1h-20.8679l-34.6279,-73.1h20.5927M64.5,4.3h-30.1l38.7,81.7h30.4053l-39.0053,-81.7z"
+                                          fill="#4788c7"></path>
+                                    <path d="M71.9046,83.85l36.9499,-77.4h25.3485l-36.6618,77.4z"
+                                          fill="#b6dcfe"></path>
+                                    <path d="M130.806,8.6l-34.6279,73.1h-20.8679l34.9031,-73.1h20.5927M137.6,4.3h-30.1l-39.0053,81.7h30.4053l38.7,-81.7z"
+                                          fill="#4788c7"></path>
+                                    <path d="M86,165.55c-24.897,0 -45.15,-20.253 -45.15,-45.15c0,-24.897 20.253,-45.15 45.15,-45.15c24.897,0 45.15,20.253 45.15,45.15c0,24.897 -20.253,45.15 -45.15,45.15z"
+                                          fill="#dff0fe"></path>
+                                    <path d="M86,77.4c23.7102,0 43,19.2898 43,43c0,23.7102 -19.2898,43 -43,43c-23.7102,0 -43,-19.2898 -43,-43c0,-23.7102 19.2898,-43 43,-43M86,73.1c-26.1225,0 -47.3,21.1775 -47.3,47.3c0,26.1225 21.1775,47.3 47.3,47.3c26.1225,0 47.3,-21.1775 47.3,-47.3c0,-26.1225 -21.1775,-47.3 -47.3,-47.3z"
+                                          fill="#4788c7"></path>
+                                    <path d="M81.7,98.9h8.6v47.3h-8.6z"
+                                          fill="#4788c7"></path>
+                                    <path d="M96.75,103.2h-21.5c-1.1868,0 -2.15,-0.9632 -2.15,-2.15v0c0,-1.1868 0.9632,-2.15 2.15,-2.15h21.5c1.1868,0 2.15,0.9632 2.15,2.15v0c0,1.1868 -0.9632,2.15 -2.15,2.15zM96.75,146.2h-21.5c-1.1868,0 -2.15,-0.9632 -2.15,-2.15v0c0,-1.1868 0.9632,-2.15 2.15,-2.15h21.5c1.1868,0 2.15,0.9632 2.15,2.15v0c0,1.1868 -0.9632,2.15 -2.15,2.15z"
+                                          fill="#4788c7"></path>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="col-12 h3">
+                        {{ team.name }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 score-part">
+                <div class="row">
+                    <div class="col-12 p-0">
+                        <span class="badge badge-link">
+                            подробнее
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                             width="12" height="12"
+                             viewBox="0 0 172 172"
+                             style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                                       stroke-linecap="butt" stroke-linejoin="miter"
+                                                       stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                                                       font-family="none" font-weight="none" font-size="none"
+                                                       text-anchor="none" style="mix-blend-mode: normal"><path
+                                d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path
+                                d="M81.45192,0c-12.48137,0.02584 -11.55108,3.35938 -4.96154,9.92308l21.29327,21.29327l-36.59135,36.59135c-7.57151,7.57151 -7.57151,19.71695 0,27.28846l16.125,15.91827c7.57151,7.54567 19.71695,7.57151 27.28846,0l36.59135,-36.38462l20.87981,20.87981c7.28726,7.28726 9.92308,7.51983 9.92308,-4.96154v-68.01442c0,-22.74038 0.23257,-22.53365 -22.53365,-22.53365zM32.25,33.07692c-17.80469,0 -32.25,14.44531 -32.25,32.25v74.42308c0,17.80469 14.44531,32.25 32.25,32.25h74.42308c17.80469,0 32.25,-14.44531 32.25,-32.25v-42.17308l-19.84615,19.84615v22.32692c0,6.84796 -5.55589,12.40385 -12.40385,12.40385h-74.42308c-6.84796,0 -12.40385,-5.55589 -12.40385,-12.40385v-74.42308c0,-6.84796 5.55589,-12.40385 12.40385,-12.40385h22.74038l19.84615,-19.84615z"></path></g></g></svg>
+                        </span>
+                    </div>
+                    <div class="col-12 p-0 text-muted my-2 text-right"><span>{{ team.team_base }}</span></div>
+                    <div class="col-12 p-0"><span
+                            class="badge badge-gold">{{ team.score }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% elif counter == 2 %}
+    <div class="col-12 medal silver p-2">
+        <div class="mrow">
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-12 p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                             width="30" height="30"
+                             viewBox="0 0 172 172"
+                             style=" fill:#000000;">
+                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                               stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                               font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                               style="mix-blend-mode: normal">
+                                <path d="M0,172v-172h172v172z" fill="none"></path>
+                                <g>
+                                    <path d="M74.4588,83.85l-36.6618,-77.4h25.3485l36.9499,77.4z" fill="#b6dcfe"></path>
+                                    <path d="M61.7867,8.6l34.9031,73.1h-20.8679l-34.6279,-73.1h20.5927M64.5,4.3h-30.1l38.7,81.7h30.4053l-39.0053,-81.7z"
+                                          fill="#4788c7"></path>
+                                    <path d="M71.9046,83.85l36.9499,-77.4h25.3485l-36.6618,77.4z" fill="#b6dcfe"></path>
+                                    <path d="M130.806,8.6l-34.6279,73.1h-20.8679l34.9031,-73.1h20.5927M137.6,4.3h-30.1l-39.0053,81.7h30.4053l38.7,-81.7z"
+                                          fill="#4788c7"></path>
+                                    <path d="M86,165.55c-24.897,0 -45.15,-20.253 -45.15,-45.15c0,-24.897 20.253,-45.15 45.15,-45.15c24.897,0 45.15,20.253 45.15,45.15c0,24.897 -20.253,45.15 -45.15,45.15z"
+                                          fill="#b6dcfe"></path>
+                                    <path d="M86,77.4c23.7102,0 43,19.2898 43,43c0,23.7102 -19.2898,43 -43,43c-23.7102,0 -43,-19.2898 -43,-43c0,-23.7102 19.2898,-43 43,-43M86,73.1c-26.1225,0 -47.3,21.1775 -47.3,47.3c0,26.1225 21.1775,47.3 47.3,47.3c26.1225,0 47.3,-21.1775 47.3,-47.3c0,-26.1225 -21.1775,-47.3 -47.3,-47.3z"
+                                          fill="#4788c7"></path>
+                                    <path d="M73.1,98.9h8.6v47.3h-8.6zM90.3,98.9h8.6v47.3h-8.6z" fill="#4788c7"></path>
+                                    <path d="M105.35,103.2h-38.7c-1.1868,0 -2.15,-0.9632 -2.15,-2.15v0c0,-1.1868 0.9632,-2.15 2.15,-2.15h38.7c1.1868,0 2.15,0.9632 2.15,2.15v0c0,1.1868 -0.9632,2.15 -2.15,2.15zM105.35,146.2h-38.7c-1.1868,0 -2.15,-0.9632 -2.15,-2.15v0c0,-1.1868 0.9632,-2.15 2.15,-2.15h38.7c1.1868,0 2.15,0.9632 2.15,2.15v0c0,1.1868 -0.9632,2.15 -2.15,2.15z"
+                                          fill="#4788c7"></path>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="col-12 h3">
+                        {{ team.name }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 score-part">
+                <div class="row">
+                    <div class="col-12 p-0">
+                        <span class="badge badge-link">
+                            подробнее
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                             width="12" height="12"
+                             viewBox="0 0 172 172"
+                             style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                                       stroke-linecap="butt" stroke-linejoin="miter"
+                                                       stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                                                       font-family="none" font-weight="none" font-size="none"
+                                                       text-anchor="none" style="mix-blend-mode: normal"><path
+                                d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path
+                                d="M81.45192,0c-12.48137,0.02584 -11.55108,3.35938 -4.96154,9.92308l21.29327,21.29327l-36.59135,36.59135c-7.57151,7.57151 -7.57151,19.71695 0,27.28846l16.125,15.91827c7.57151,7.54567 19.71695,7.57151 27.28846,0l36.59135,-36.38462l20.87981,20.87981c7.28726,7.28726 9.92308,7.51983 9.92308,-4.96154v-68.01442c0,-22.74038 0.23257,-22.53365 -22.53365,-22.53365zM32.25,33.07692c-17.80469,0 -32.25,14.44531 -32.25,32.25v74.42308c0,17.80469 14.44531,32.25 32.25,32.25h74.42308c17.80469,0 32.25,-14.44531 32.25,-32.25v-42.17308l-19.84615,19.84615v22.32692c0,6.84796 -5.55589,12.40385 -12.40385,12.40385h-74.42308c-6.84796,0 -12.40385,-5.55589 -12.40385,-12.40385v-74.42308c0,-6.84796 5.55589,-12.40385 12.40385,-12.40385h22.74038l19.84615,-19.84615z"></path></g></g></svg>
+                        </span>
+                    </div>
+                    <div class="col-12 p-0 text-muted my-2 text-right"><span>{{ team.team_base }}</span></div>
+                    <div class="col-12 p-0"><span
+                            class="badge badge-silver">{{ team.score }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% elif counter == 3 %}
+    <div class="col-12 medal bronze p-2">
+        <div class="mrow">
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-12 p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             x="0px" y="0px"
+                             width="30" height="30"
+                             viewBox="0 0 172 172"
+                             style=" fill:#000000;">
+                            <g fill="none" fill-rule="nonzero"
+                               stroke="none" stroke-width="1"
+                               stroke-linecap="butt"
+                               stroke-linejoin="miter"
+                               stroke-miterlimit="10"
+                               stroke-dasharray=""
+                               stroke-dashoffset="0"
+                               font-family="none" font-weight="none"
+                               font-size="none" text-anchor="none"
+                               style="mix-blend-mode: normal">
+                                <path d="M0,172v-172h172v172z"
+                                      fill="none"></path>
+                                <g>
+                                    <path d="M74.4588,83.85l-36.6618,-77.4h25.3485l36.9499,77.4z"
+                                          fill="#b6dcfe"></path>
+                                    <path d="M61.7867,8.6l34.9031,73.1h-20.8679l-34.6279,-73.1h20.5927M64.5,4.3h-30.1l38.7,81.7h30.4053l-39.0053,-81.7z"
+                                          fill="#4788c7"></path>
+                                    <path d="M71.9046,83.85l36.9499,-77.4h25.3485l-36.6618,77.4z"
+                                          fill="#b6dcfe"></path>
+                                    <path d="M130.806,8.6l-34.6279,73.1h-20.8679l34.9031,-73.1h20.5927M137.6,4.3h-30.1l-39.0053,81.7h30.4053l38.7,-81.7z"
+                                          fill="#4788c7"></path>
+                                    <path d="M86,165.55c-24.897,0 -45.15,-20.253 -45.15,-45.15c0,-24.897 20.253,-45.15 45.15,-45.15c24.897,0 45.15,20.253 45.15,45.15c0,24.897 -20.253,45.15 -45.15,45.15z"
+                                          fill="#98ccfd"></path>
+                                    <path d="M86,77.4c23.7102,0 43,19.2898 43,43c0,23.7102 -19.2898,43 -43,43c-23.7102,0 -43,-19.2898 -43,-43c0,-23.7102 19.2898,-43 43,-43M86,73.1c-26.1225,0 -47.3,21.1775 -47.3,47.3c0,26.1225 21.1775,47.3 47.3,47.3c26.1225,0 47.3,-21.1775 47.3,-47.3c0,-26.1225 -21.1775,-47.3 -47.3,-47.3z"
+                                          fill="#4788c7"></path>
+                                    <path d="M64.5,98.9h8.6v47.3h-8.6zM98.9,98.9h8.6v47.3h-8.6zM81.7,98.9h8.6v47.3h-8.6z"
+                                          fill="#4788c7"></path>
+                                    <path d="M113.95,103.2h-55.9c-1.1868,0 -2.15,-0.9632 -2.15,-2.15v0c0,-1.1868 0.9632,-2.15 2.15,-2.15h55.9c1.1868,0 2.15,0.9632 2.15,2.15v0c0,1.1868 -0.9632,2.15 -2.15,2.15zM113.95,146.2h-55.9c-1.1868,0 -2.15,-0.9632 -2.15,-2.15v0c0,-1.1868 0.9632,-2.15 2.15,-2.15h55.9c1.1868,0 2.15,0.9632 2.15,2.15v0c0,1.1868 -0.9632,2.15 -2.15,2.15z"
+                                          fill="#4788c7"></path>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="col-12 h3">
+                        {{ team.name }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 score-part">
+                <div class="row">
+                    <div class="col-12 p-0">
+                        <span class="badge badge-link">
+                            подробнее
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                             width="12" height="12"
+                             viewBox="0 0 172 172"
+                             style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                                       stroke-linecap="butt" stroke-linejoin="miter"
+                                                       stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                                                       font-family="none" font-weight="none" font-size="none"
+                                                       text-anchor="none" style="mix-blend-mode: normal"><path
+                                d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path
+                                d="M81.45192,0c-12.48137,0.02584 -11.55108,3.35938 -4.96154,9.92308l21.29327,21.29327l-36.59135,36.59135c-7.57151,7.57151 -7.57151,19.71695 0,27.28846l16.125,15.91827c7.57151,7.54567 19.71695,7.57151 27.28846,0l36.59135,-36.38462l20.87981,20.87981c7.28726,7.28726 9.92308,7.51983 9.92308,-4.96154v-68.01442c0,-22.74038 0.23257,-22.53365 -22.53365,-22.53365zM32.25,33.07692c-17.80469,0 -32.25,14.44531 -32.25,32.25v74.42308c0,17.80469 14.44531,32.25 32.25,32.25h74.42308c17.80469,0 32.25,-14.44531 32.25,-32.25v-42.17308l-19.84615,19.84615v22.32692c0,6.84796 -5.55589,12.40385 -12.40385,12.40385h-74.42308c-6.84796,0 -12.40385,-5.55589 -12.40385,-12.40385v-74.42308c0,-6.84796 5.55589,-12.40385 12.40385,-12.40385h22.74038l19.84615,-19.84615z"></path></g></g></svg>
+                        </span>
+                    </div>
+                    <div class="col-12 p-0 text-muted my-2 text-right"><span>{{ team.team_base }}</span></div>
+                    <div class="col-12 p-0"><span
+                            class="badge badge-bronze">{{ team.score }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="col-12 medal else p-2">
+        <div class="mrow">
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-12 p-2">
+                        <span class="badge badge-light">#{{ counter }}</span>
+                    </div>
+                    <div class="col-12 h3">
+                        {{ team.name }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 score-part">
+                <div class="row">
+                    <div class="col-12 p-0">
+                        <span class="badge badge-link">
+                            подробнее
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                             width="12" height="12"
+                             viewBox="0 0 172 172"
+                             style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                                       stroke-linecap="butt" stroke-linejoin="miter"
+                                                       stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                                                       font-family="none" font-weight="none" font-size="none"
+                                                       text-anchor="none" style="mix-blend-mode: normal"><path
+                                d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path
+                                d="M81.45192,0c-12.48137,0.02584 -11.55108,3.35938 -4.96154,9.92308l21.29327,21.29327l-36.59135,36.59135c-7.57151,7.57151 -7.57151,19.71695 0,27.28846l16.125,15.91827c7.57151,7.54567 19.71695,7.57151 27.28846,0l36.59135,-36.38462l20.87981,20.87981c7.28726,7.28726 9.92308,7.51983 9.92308,-4.96154v-68.01442c0,-22.74038 0.23257,-22.53365 -22.53365,-22.53365zM32.25,33.07692c-17.80469,0 -32.25,14.44531 -32.25,32.25v74.42308c0,17.80469 14.44531,32.25 32.25,32.25h74.42308c17.80469,0 32.25,-14.44531 32.25,-32.25v-42.17308l-19.84615,19.84615v22.32692c0,6.84796 -5.55589,12.40385 -12.40385,12.40385h-74.42308c-6.84796,0 -12.40385,-5.55589 -12.40385,-12.40385v-74.42308c0,-6.84796 5.55589,-12.40385 12.40385,-12.40385h22.74038l19.84615,-19.84615z"></path></g></g></svg>
+                        </span>
+                    </div>
+                    <div class="col-12 p-0 text-muted my-2 text-right"><span>{{ team.team_base }}</span></div>
+                    <div class="col-12 p-0"><span
+                            class="badge badge-light">{{ team.score }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

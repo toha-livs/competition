@@ -1,0 +1,81 @@
+{% extends 'common/base.html' %}
+
+
+{% block title %}
+    {{ competitions.0.competition_scope.name}}
+{% endblock %}
+
+{% block extra_style %}
+    <style>
+    .plit {
+    background-color: #f8fcff;
+    display: block;
+    width:100%;
+    min-height: 90px;
+    box-shadow: 1px 3px 11px 0.3px #71a2a2;
+    }
+    .plit div.com-name {
+        padding:20px;
+        font-size: 18px;
+    }
+    .plit div.com-name.long {
+        padding: 10px;
+    }
+    </style>
+{% endblock %}
+
+
+{% block header_back_button %}
+    <a class="navbar-brand plit-color" href="{% url 'competition:scope-list' %}">
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+        width="24" height="24"
+        viewBox="0 0 172 172"
+        style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#49a0ac"><path d="M71.15783,86l27.38383,-27.38383c2.967,-2.967 2.967,-7.783 0,-10.75v0c-2.967,-2.967 -7.783,-2.967 -10.75,0l-33.067,33.067c-2.80217,2.80217 -2.80217,7.33867 0,10.13367l33.067,33.067c2.967,2.967 7.783,2.967 10.75,0v0c2.967,-2.967 2.967,-7.783 0,-10.75z"></path></g></g></svg>
+        к списку
+      </a>
+{% endblock %}
+
+{% block body %}
+<div class="col-12">
+<div class="row">
+    {% for competiton in competitions %}
+        <div class="col-sm-12 col-lg-4 col-md-6 p-1">
+            <div data-url="{% url 'competition:competition-detail' competiton.id %}" class="col-12 plit plit-color text-center rounded p-2 link">
+                <div class="row">
+                    <div class="col-6 com-name {% if competiton.name|length >  15 %}long{% endif %}" title="{{ competiton.name }}">
+                        {{ competiton.name }}
+                    </div>
+                    <div class="col-6 text-right">
+                        <div class="row">
+                            <div class="col-12" style="margin-bottom: 25px;">
+                                <span class="badge text-white
+                                            {% if competiton.gymnast_count < 15 %}
+                                            badge-secondary
+                                            {% elif competiton.gymnast_count < 50 %}
+                                            badge-info
+                                            {% else %}
+                                            badge-success
+                                            {% endif %}
+"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                        width="20" height="20"
+                                        viewBox="0 0 172 172"
+                                        style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M103.2,108.93333v-11.46667c2.58,-1.27853 9.9588,-10.062 10.7328,-16.9248c2.0296,-0.1548 5.21733,-2.01813 6.1576,-9.374c0.50453,-3.95027 -1.50213,-6.16907 -2.7176,-6.86853c0,0 3.0272,-5.75053 3.0272,-12.6936c0,-13.92053 -5.46387,-25.8 -17.2,-25.8c0,0 -4.0764,-8.6 -17.2,-8.6c-24.3208,0 -34.4,15.6004 -34.4,34.4c0,6.3296 3.0272,12.6936 3.0272,12.6936c-1.21547,0.69947 -3.22213,2.924 -2.7176,6.86853c0.94027,7.35587 4.128,9.2192 6.1576,9.374c0.774,6.8628 8.1528,15.64627 10.7328,16.9248v11.46667c-5.73333,17.2 -51.6,5.73333 -51.6,45.86667h137.6c0,-40.13333 -45.86667,-28.66667 -51.6,-45.86667z"></path></g></g>
+                                    </svg>
+                                     {{ competiton.gymnast_count }}
+                                </span>
+                            </div>
+                            <div class="col-12">
+                                <small class="text-muted">{{ competiton.date|date:'d.m.Y' }}</small>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

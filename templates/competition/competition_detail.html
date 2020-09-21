@@ -1,0 +1,251 @@
+{% extends 'common/base.html' %}
+
+
+{% block extra_style %}
+    {{  block.super }}
+    <style>
+    .excel {
+        border: 2px solid #3f8c28;
+        text-align: center;
+        color: white;
+        padding: 1rem!important;
+        border-radius: 5px;
+        font-size:25px;
+    }
+    .type-render-row .col-6:first-child {
+        border-right: 0.5px solid white;
+    }
+    .type-render-row .col-6:last-child {
+        border-left: 0.5px solid white;
+    }
+    .medal {
+        border-radius: 5px;
+    }
+    .gold {
+        border: 2px solid #efe18bb8;
+    }
+    .silver {
+        border: 2px solid #d4d4d4cc;
+    }
+    .bronze {
+        border: 2px solid #a2744685;
+    }
+    .medal.else {
+        box-shadow: 1px 1px 5px 1px #bcbcbc;
+    }
+    .badge-bronze {
+        background-color: #a2744685;
+    }
+    .badge-silver {
+        background-color: #d4d4d4cc;
+    }
+    .badge-gold {
+        background-color: #efe18bb8;
+    }
+    .score-part .badge {
+        font-size: 20px;
+        float:right;
+    }
+    .badge-link {
+        background-color: #6ba5de;
+        color:white;
+        font-size: 12px!important;
+    }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="col-12">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-ms-12 col-lg-6 col-md-6 p-4">
+                        <div class="row">
+                            <div class="col-12 bg-success excel">
+                                Скачать в .excel
+                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                     width="25" height="33"
+                                     viewBox="0 0 172 172"
+                                     style=" fill:#000000; float:right;">
+                                    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                       stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
+                                       stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+                                       font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                                        <path d="M0,172v-172h172v172z" fill="none"></path>
+                                        <g fill="#ffffff">
+                                            <path d="M99.4375,6.7725c-0.14781,0.02688 -0.29562,0.06719 -0.43,0.1075h-59.4475c-6.58437,0 -12.04,5.36156 -12.04,11.9325v132.225c0,7.75344 6.42313,14.0825 14.19,14.0825h88.58c7.76688,0 14.19,-6.32906 14.19,-14.0825v-98.7925c0.09406,-0.45687 0.09406,-0.94062 0,-1.3975v-0.9675c0.02688,-0.91375 -0.3225,-1.81406 -0.9675,-2.4725l-39.56,-39.56c-0.65844,-0.645 -1.55875,-0.99437 -2.4725,-0.9675h-1.075c-0.30906,-0.08062 -0.645,-0.12094 -0.9675,-0.1075zM39.56,13.76h56.76v28.7025c0,6.92031 5.65719,12.5775 12.5775,12.5775h28.7025v95.9975c0,4.01781 -3.25187,7.2025 -7.31,7.2025h-88.58c-4.05812,0 -7.31,-3.18469 -7.31,-7.2025v-132.225c0,-2.83531 2.27094,-5.0525 5.16,-5.0525zM103.2,16.985l31.175,31.175h-25.4775c-3.21156,0 -5.6975,-2.48594 -5.6975,-5.6975zM58.48,82.56v48.16h55.04v-48.16zM65.36,89.44h17.2v6.88h-17.2zM89.44,89.44h17.2v6.88h-17.2zM65.36,103.2h17.2v6.88h-17.2zM89.44,103.2h17.2v6.88h-17.2zM65.36,116.96h17.2v6.88h-17.2zM89.44,116.96h17.2v6.88h-17.2z"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-ms-12 col-lg-6 col-md-6 p-4">
+                        <div class="row">
+                            <div class="col-12 bg-success excel">
+                                Скачать в .csv
+                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                     width="25" height="33"
+                                     viewBox="0 0 172 172"
+                                     style=" fill:#000000; float:right;">
+                                    <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                       stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
+                                       stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+                                       font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                                        <path d="M0,172v-172h172v172z" fill="none"></path>
+                                        <g fill="#ffffff">
+                                            <path d="M99.4375,6.7725c-0.14781,0.02688 -0.29562,0.06719 -0.43,0.1075h-59.4475c-6.58437,0 -12.04,5.36156 -12.04,11.9325v132.225c0,7.75344 6.42313,14.0825 14.19,14.0825h88.58c7.76688,0 14.19,-6.32906 14.19,-14.0825v-98.7925c0.09406,-0.45687 0.09406,-0.94062 0,-1.3975v-0.9675c0.02688,-0.91375 -0.3225,-1.81406 -0.9675,-2.4725l-39.56,-39.56c-0.65844,-0.645 -1.55875,-0.99437 -2.4725,-0.9675h-1.075c-0.30906,-0.08062 -0.645,-0.12094 -0.9675,-0.1075zM39.56,13.76h56.76v28.7025c0,6.92031 5.65719,12.5775 12.5775,12.5775h28.7025v95.9975c0,4.01781 -3.25187,7.2025 -7.31,7.2025h-88.58c-4.05812,0 -7.31,-3.18469 -7.31,-7.2025v-132.225c0,-2.83531 2.27094,-5.0525 5.16,-5.0525zM103.2,16.985l31.175,31.175h-25.4775c-3.21156,0 -5.6975,-2.48594 -5.6975,-5.6975zM58.48,82.56v48.16h55.04v-48.16zM65.36,89.44h17.2v6.88h-17.2zM89.44,89.44h17.2v6.88h-17.2zM65.36,103.2h17.2v6.88h-17.2zM89.44,103.2h17.2v6.88h-17.2zM65.36,116.96h17.2v6.88h-17.2zM89.44,116.96h17.2v6.88h-17.2z"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 p-4 mb-2">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row type-render-row">
+                                    <div class="col-6 text-center p-3">
+                                        {% if user.ext.render_type == 1 %}
+                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                                 width="48" height="48"
+                                                 viewBox="0 0 172 172"
+                                                 style=" fill:#000000;">
+                                                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                                   stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
+                                                   stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                                                   font-weight="none" font-size="none" text-anchor="none"
+                                                   style="mix-blend-mode: normal">
+                                                    <path d="M0,172v-172h172v172z" fill="none"></path>
+                                                    <g fill="#287a90">
+                                                        <path d="M21.5,32.25c-5.93706,0 -10.75,4.81294 -10.75,10.75c0,5.93706 4.81294,10.75 10.75,10.75c5.93706,0 10.75,-4.81294 10.75,-10.75c0,-5.93706 -4.81294,-10.75 -10.75,-10.75zM50.16667,35.83333v14.33333h107.5v-14.33333zM21.5,75.25c-5.93706,0 -10.75,4.81294 -10.75,10.75c0,5.93706 4.81294,10.75 10.75,10.75c5.93706,0 10.75,-4.81294 10.75,-10.75c0,-5.93706 -4.81294,-10.75 -10.75,-10.75zM50.16667,78.83333v14.33333h107.5v-14.33333zM21.5,118.25c-5.93706,0 -10.75,4.81294 -10.75,10.75c0,5.93706 4.81294,10.75 10.75,10.75c5.93706,0 10.75,-4.81294 10.75,-10.75c0,-5.93706 -4.81294,-10.75 -10.75,-10.75zM50.16667,121.83333v14.33333h107.5v-14.33333z"></path>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        {% else %}
+                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                                 width="48" height="48"
+                                                 viewBox="0 0 172 172"
+                                                 style=" fill:#000000;">
+                                                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                                   stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
+                                                   stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                                                   font-weight="none" font-size="none" text-anchor="none"
+                                                   style="mix-blend-mode: normal">
+                                                    <path d="M0,172v-172h172v172z" fill="none"></path>
+                                                    <g fill="#ffffff">
+                                                        <path d="M21.5,32.25c-5.93706,0 -10.75,4.81294 -10.75,10.75c0,5.93706 4.81294,10.75 10.75,10.75c5.93706,0 10.75,-4.81294 10.75,-10.75c0,-5.93706 -4.81294,-10.75 -10.75,-10.75zM50.16667,35.83333v14.33333h107.5v-14.33333zM21.5,75.25c-5.93706,0 -10.75,4.81294 -10.75,10.75c0,5.93706 4.81294,10.75 10.75,10.75c5.93706,0 10.75,-4.81294 10.75,-10.75c0,-5.93706 -4.81294,-10.75 -10.75,-10.75zM50.16667,78.83333v14.33333h107.5v-14.33333zM21.5,118.25c-5.93706,0 -10.75,4.81294 -10.75,10.75c0,5.93706 4.81294,10.75 10.75,10.75c5.93706,0 10.75,-4.81294 10.75,-10.75c0,-5.93706 -4.81294,-10.75 -10.75,-10.75zM50.16667,121.83333v14.33333h107.5v-14.33333z"></path>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-6 text-center p-3">
+                                        {% if user.ext.render_type == 0 %}
+                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                                 width="48" height="48"
+                                                 viewBox="0 0 172 172"
+                                                 style=" fill:#000000;">
+                                                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                                   stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
+                                                   stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                                                   font-weight="none" font-size="none" text-anchor="none"
+                                                   style="mix-blend-mode: normal">
+                                                    <path d="M0,172v-172h172v172z" fill="none"></path>
+                                                    <g fill="#24768c">
+                                                        <path d="M19.84615,6.61538c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077zM79.38462,6.61538c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077zM138.92308,6.61538c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077zM19.84615,66.15385c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077zM79.38462,66.15385c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077zM138.92308,66.15385c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077zM19.84615,125.69231c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077zM79.38462,125.69231c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077zM138.92308,125.69231c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077z"></path>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        {% else %}
+                                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                                 width="48" height="48"
+                                                 viewBox="0 0 172 172"
+                                                 style=" fill:#000000;">
+                                                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                                   stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
+                                                   stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                                                   font-weight="none" font-size="none" text-anchor="none"
+                                                   style="mix-blend-mode: normal">
+                                                    <path d="M0,172v-172h172v172z" fill="none"></path>
+                                                    <g fill="#ffffff">
+                                                        <path d="M19.84615,6.61538c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077zM79.38462,6.61538c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077zM138.92308,6.61538c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077zM19.84615,66.15385c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077zM79.38462,66.15385c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077zM138.92308,66.15385c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077zM19.84615,125.69231c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077zM79.38462,125.69231c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077zM138.92308,125.69231c-7.28726,0 -13.23077,5.94351 -13.23077,13.23077v13.23077c0,7.28726 5.94351,13.23077 13.23077,13.23077h13.23077c7.28726,0 13.23077,-5.94351 13.23077,-13.23077v-13.23077c0,-7.28726 -5.94351,-13.23077 -13.23077,-13.23077z"></path>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12 bg-white rounded" style="border: 2px solid #2787a0;">
+                                <div class="row">
+                                    <div class="col-12 group-result-trigger text-center p-3 plit-color">
+                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                             width="26" height="26"
+                                             viewBox="0 0 172 172"
+                                             style=" fill:#000000; float: left;">
+                                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                               stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
+                                               stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                                               font-weight="none" font-size="none" text-anchor="none"
+                                               style="mix-blend-mode: normal">
+                                                <path d="M0,172v-172h172v172z" fill="none"></path>
+                                                <g fill="#286a7b">
+                                                    <path d="M150.5,79.6145v0c0,-9.5245 -10.61383,-15.20767 -18.54017,-9.92583l-45.95983,30.64467l-45.95983,-30.6375c-7.92633,-5.28183 -18.54017,0.39417 -18.54017,9.91867v0c0,3.98467 1.99233,7.71133 5.3105,9.92583l51.24167,34.15633c4.816,3.21067 11.08683,3.21067 15.90283,0l51.24167,-34.15633c3.311,-2.2145 5.30333,-5.934 5.30333,-9.92583z"></path>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                        КОМАНДНЫЕ РЕЗУЛЬТАТЫ
+                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                             width="26" height="26"
+                                             viewBox="0 0 172 172"
+                                             style=" fill:#000000; float: right;">
+                                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1"
+                                               stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10"
+                                               stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                                               font-weight="none" font-size="none" text-anchor="none"
+                                               style="mix-blend-mode: normal">
+                                                <path d="M0,172v-172h172v172z" fill="none"></path>
+                                                <g fill="#286a7b">
+                                                    <path d="M150.5,79.6145v0c0,-9.5245 -10.61383,-15.20767 -18.54017,-9.92583l-45.95983,30.64467l-45.95983,-30.6375c-7.92633,-5.28183 -18.54017,0.39417 -18.54017,9.91867v0c0,3.98467 1.99233,7.71133 5.3105,9.92583l51.24167,34.15633c4.816,3.21067 11.08683,3.21067 15.90283,0l51.24167,-34.15633c3.311,-2.2145 5.30333,-5.934 5.30333,-9.92583z"></path>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="col-12 results" style="display:none;">
+                                        <div class="row">
+                                            {% for team in results %}
+                                                <div class="col-12 p-2">
+                                                    <div class="mrow">
+                                                        {% include 'competition/includes/teams_result_row.html' with counter=forloop.counter team=team %}
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12"></div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+<script type="text/javascript">
+    $(function (){
+        $('.group-result-trigger').click(function (){
+            $('.results').toggle('fast')
+        })
+    })
+</script>
+{% endblock %}
+

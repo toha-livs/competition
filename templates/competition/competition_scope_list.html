@@ -1,0 +1,135 @@
+{% extends 'common/base.html' %}
+
+{% load common %}
+
+{% block extra_style %}
+    <style>
+    .plit {
+    background-color: #f8fcff;
+    display: block;
+    width:100%;
+    min-height: 90px;
+    box-shadow: 1px 3px 11px 0.3px #71a2a2;
+    }
+    .plit div.com-name {
+        padding:20px;
+        font-size: 18px;
+    }
+    .plit div.com-name.long {
+        padding: 10px;
+    }
+    .search-input {
+
+    }
+    input.search-input {
+        border-radius: 20px;
+        border: 2px solid #49a0ac38;
+        width: 100%;
+        padding: 0 20px;
+    }
+    .expect-com-link {
+        background-color: #459eb4;
+        padding: 12px;
+        font-size: 20px;
+        color: #dcf8ff;
+        border-radius: 25px;
+        border: 2px solid #baf0ff;
+    }
+
+    </style>
+{% endblock %}
+
+{% block title %}
+    Соревнования
+{% endblock %}
+
+{% block heard_end_nav %}
+    <a class="navbar-brand plit-color search">
+        <span class="search-span">
+            <svg  xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                width="34" height="34"
+                viewBox="0 0 172 172"
+                style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#49a0ad"><path d="M73.45833,21.5c-28.61092,0 -51.95833,23.34743 -51.95833,51.95833c0,28.6109 23.34741,51.95833 51.95833,51.95833c11.72882,0 22.53529,-3.96669 31.24919,-10.56803l33.55876,33.55176c1.79752,1.87223 4.46675,2.62641 6.97825,1.97168c2.5115,-0.65472 4.47282,-2.61605 5.12755,-5.12755c0.65472,-2.5115 -0.09946,-5.18073 -1.97168,-6.97825l-33.55176,-33.55876c6.60135,-8.7139 10.56803,-19.52038 10.56803,-31.24919c0,-28.6109 -23.34741,-51.95833 -51.95833,-51.95833zM73.45833,35.83333c20.86462,0 37.625,16.76039 37.625,37.625c0,10.01796 -3.89127,19.06549 -10.2181,25.7902c-0.61586,0.44585 -1.15686,0.98684 -1.6027,1.6027c-6.72616,6.33487 -15.77907,10.2321 -25.8042,10.2321c-20.86462,0 -37.625,-16.76039 -37.625,-37.625c0,-20.86461 16.76038,-37.625 37.625,-37.625z"></path></g></g></svg>
+        </span>
+
+    </a>
+{% endblock %}
+
+{% block body %}
+<div class="col-12">
+<div class="row search-row" style="display: none;">
+    <div class="col-12 my-4 text-right">
+        <div class="row">
+            <div class="col-sm-12 col-lg-4 col-md-4 offset-md-8 offset-lg-8">
+                <span>
+                    <form id="search-form">
+                        <input id="search-input" class="search-input" name="search" placeholder="Название соревнований, фамилия участника">
+                    </form>
+                </span>
+            </div>
+        </div>
+{#        <span data-url="{% url 'competition:expected-scope-list' %}" class="link expect-com-link">#}
+{#            Запланированные соревнования#}
+{#        </span>#}
+
+    </div>
+</div>
+<div class="row mt-2">
+    {% for competiton in competitions %}
+        {% if forloop.counter0 != 0 %}
+        {% with previous_ind=forloop.counter0|add:"-1"  %}
+        {% with previous_competiton=competitions|m_index:previous_ind %}
+        {% if competiton.date_start.month != previous_competiton.date_start.month %}
+            </div>
+            <div class="row">
+            <div class="col-12 h2 my-4 text-white text-center">
+              {{ competiton.date_start|date:"M" }}  {{ competiton.date_start|date:"Y" }}
+            </div>
+        {% endif %}
+        {% endwith %}
+        {% endwith %}
+        {% endif %}
+        <div class="col-sm-12 col-lg-4 col-md-6 p-1">
+            <div data-url="{% url 'competition:competition-list' competiton.id %}" class="col-12 plit plit-color text-center rounded p-2 monospace link">
+                <div class="row">
+                    <div class="col-6 com-name {% if competiton.name|length >  15 %}long{% endif %}" title="{{ competiton.name }}">
+                        {{ competiton.name }}
+                    </div>
+                    <div class="col-6 text-right">
+                        <div class="row">
+                            <div class="col-12" style="margin-bottom: 25px;">
+                                {% if competiton.level == 0 %}
+                                <img src="https://img.icons8.com/dusk/24/000000/globe-earth.png"/>
+                                {% elif competiton.level == 1 %}
+                                <img src="https://img.icons8.com/color/24/000000/ukraine-circular.png"/>
+                                {% else %}
+                                region <img src="https://img.icons8.com/dusk/24/000000/region-code.png"/>
+                                {% endif %}
+                            </div>
+                            <div class="col-12">
+                                <small class="text-muted">{{ competiton.date_render }}</small>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script type="text/javascript">
+$('.search-span').click(function (){
+    if ($(this).hasClass('active')) {
+        $('#search-form').submit()
+    } else {
+        $(this).addClass('active')
+        $('.search-row').show('fast')
+    }
+})
+</script>
+{% endblock %}

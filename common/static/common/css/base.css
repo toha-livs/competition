@@ -1,0 +1,40 @@
+A {
+    text-decoration: none; /* Отменяем подчеркивание у ссылки */
+}
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+.mrow {
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+input:focus{
+    outline: none;
+}
+
+.navbar {
+    box-shadow: 0 0 6px 1px #867979;
+    margin-bottom: 10px;
+}
+
+
+.my-container {
+    width: 100%;
+    display: block;
+    padding: 1% 5%;
+}
+
+.bg-blue {
+    background-color: #57c3dd;
+}
+body {
+    background-color: #4788c7;
+}
+.plit-color {
+    color: #1f3b65!important;
+}

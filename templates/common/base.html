@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% if full_window %}
+    {% else %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endif %}
+    <title>{% block title %}{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'common/css/base.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    {% block extra_style %}
+    {% endblock %}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+</head>
+<body class="bg-blue">
+    <nav class="navbar navbar-light bg-white">
+        {% block header_back_button %}
+            <a class="navbar-brand plit-color" href="/">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                width="24" height="24"
+                viewBox="0 0 172 172"
+                style=" fill:#000000;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#57c3dd"><path d="M141.54167,154.08333h-32.25c-4.94858,0 -8.95833,-4.00975 -8.95833,-8.95833v-32.25c0,-3.95958 -3.20708,-7.16667 -7.16667,-7.16667h-14.33333c-3.95958,0 -7.16667,3.20708 -7.16667,7.16667v32.25c0,4.94858 -4.00975,8.95833 -8.95833,8.95833h-32.25c-4.94858,0 -8.95833,-4.00975 -8.95833,-8.95833v-68.39508c0,-8.23808 3.77683,-16.02108 10.24475,-21.11658l50.92633,-40.12975c1.95292,-1.53367 4.70492,-1.53367 6.65425,0l50.9335,40.12975c6.46792,5.0955 10.24117,12.87492 10.24117,21.10942v68.40225c0,4.94858 -4.00975,8.95833 -8.95833,8.95833z"></path></g></g>
+            </svg>
+          </a>
+        {% endblock %}
+        <a class="navbar-brand plit-color mx-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                width="40" height="40"
+                viewBox="0 0 172 172"
+                 style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g><path d="M165.55,167.7h-159.1c-1.1868,0 -2.15,-0.9632 -2.15,-2.15v0c0,-1.1868 0.9632,-2.15 2.15,-2.15h159.1c1.1868,0 2.15,0.9632 2.15,2.15v0c0,1.1868 -0.9632,2.15 -2.15,2.15zM165.55,146.2h-159.1c-1.1868,0 -2.15,-0.9632 -2.15,-2.15v0c0,-1.1868 0.9632,-2.15 2.15,-2.15h159.1c1.1868,0 2.15,0.9632 2.15,2.15v0c0,1.1868 -0.9632,2.15 -2.15,2.15z" fill="#57c3dd"></path><path d="M77.4,165.55c-0.3655,0 -0.7396,-0.0301 -1.1137,-0.0946c-3.0444,-0.5117 -5.3363,-3.4701 -5.3363,-6.88v-103.8579l-56.9535,-35.9781c-3.1605,-1.8963 -4.1796,-5.9598 -2.3048,-9.0816c1.204,-2.0081 3.3239,-3.2078 5.6674,-3.2078c1.1911,0 2.365,0.3268 3.397,0.946l65.2439,33.7249l65.1278,-33.6604c1.1524,-0.6837 2.322,-1.0105 3.5131,-1.0105c2.3435,0 4.4634,1.1997 5.6674,3.2078c1.8748,3.1218 0.8557,7.1853 -2.2661,9.0601l-56.9922,35.9996v34.8472l41.8949,-22.0461c0.9804,-0.4859 2.1156,-0.7525 3.2551,-0.7525c2.1543,0 4.0463,0.9159 5.1987,2.5112c1.1481,1.5953 1.5265,3.5002 1.0664,5.3664c-0.4515,1.8404 -1.6856,3.3841 -3.3798,4.2312l-65.2353,36.0426v44.1825c0,3.5561 -2.8939,6.45 -6.45,6.45z" fill="#ffffff"></path><path d="M154.6409,8.6c1.5824,0 3.01,0.8084 3.8227,2.1629c1.2642,2.107 0.5805,4.8461 -1.6082,6.1619l-55.9516,35.3417l-2.0038,1.2642v2.3693v30.1v7.1208l6.3038,-3.3153l38.6656,-20.3476c0.7181,-0.3612 1.5265,-0.5504 2.3306,-0.5504c1.4534,0 2.7133,0.5891 3.4529,1.6211c0.774,1.0707 1.032,2.3478 0.7224,3.5948c-0.301,1.2298 -1.1223,2.2575 -2.4123,2.9068l-64.0442,35.3933l-2.2188,1.2255v2.537v42.914c0,2.3693 -1.9307,4.3 -4.3,4.3c-0.2494,0 -0.4988,-0.0215 -0.7568,-0.0645c-1.9866,-0.3354 -3.5432,-2.4252 -3.5432,-4.7601v-42.4754v-21.5v-38.7v-2.3693l-2.0038,-1.2642l-56.0333,-35.3933c-2.107,-1.2642 -2.7907,-4.0076 -1.5265,-6.1103c0.8127,-1.3545 2.2403,-2.1629 3.8227,-2.1629c0.8041,0 1.5953,0.2193 2.2919,0.6364l0.1161,0.0688l0.1204,0.0602l64.1388,33.153l1.9737,1.0234l1.9737,-1.0191l64.1388,-33.153l0.1204,-0.0602l0.1161,-0.0688c0.6966,-0.4214 1.4878,-0.6407 2.2919,-0.6407M154.6409,4.3c-1.5351,0 -3.0874,0.4042 -4.5021,1.247l-64.1388,33.153l-64.1388,-33.153c-1.4147,-0.8428 -2.967,-1.247 -4.5021,-1.247c-2.9713,0 -5.8695,1.5136 -7.5121,4.2484c-2.4854,4.1452 -1.1395,9.5245 3.0014,12.0099l55.9516,35.3417v0v38.7v21.5v42.4754c0,4.2871 2.9025,8.2904 7.1294,8.9999c0.4988,0.086 0.989,0.1247 1.4706,0.1247c4.73,0 8.6,-3.87 8.6,-8.6v-42.914l64.0442,-35.3933c4.6741,-2.3349 6.2909,-8.3506 3.096,-12.7796c-1.6297,-2.2575 -4.2527,-3.4056 -6.9445,-3.4056c-1.4491,0 -2.9154,0.3311 -4.257,1.0019l-38.7387,20.3906v-30.1l55.9516,-35.3417c4.1452,-2.4854 5.4868,-7.8647 3.0014,-12.0099c-1.6426,-2.7348 -4.5408,-4.2484 -7.5121,-4.2484z" fill="#57c3dd"></path><path d="M105.35,113.95c-7.12447,0 -12.9,5.77553 -12.9,12.9c0,7.12447 5.77553,12.9 12.9,12.9c7.12447,0 12.9,-5.77553 12.9,-12.9c0,-7.12447 -5.77553,-12.9 -12.9,-12.9z" fill="#ffffff"></path><path d="M105.35,116.1c5.9297,0 10.75,4.8203 10.75,10.75c0,5.9297 -4.8203,10.75 -10.75,10.75c-5.9297,0 -10.75,-4.8203 -10.75,-10.75c0,-5.9297 4.8203,-10.75 10.75,-10.75M105.35,111.8c-8.3119,0 -15.05,6.7381 -15.05,15.05c0,8.3119 6.7381,15.05 15.05,15.05c8.3119,0 15.05,-6.7381 15.05,-15.05c0,-8.3119 -6.7381,-15.05 -15.05,-15.05z" fill="#57c3dd"></path><g><path d="M70.95,131.15v-74.3599l15.05,-15.05l15.05,15.05v32.7703l17.2,-9.0515v15.3983l-32.809,18.1331l-0.1935,0.0473l-1.3975,0.5203v16.5421z" fill="#235b6a"></path><path d="M86,44.7802l12.9,12.9v28.3198v7.1208l6.3038,-3.3153l10.8962,-5.7362v10.5694l-31.4244,17.3634l-0.1892,0.0731l-2.7864,1.0492v2.9756v12.9h-8.6v-12.9v-21.5v-36.9198l12.9,-12.9M86,38.7l-17.2,17.2v0v0v38.7v21.5v17.2h17.2v-17.2l0.4816,-0.1806l33.9184,-18.7437v-20.2272l-17.2,9.0515v-30.1l-17.2,-17.2z" fill="#57c3dd"></path></g></g></g></svg>
+        </a>
+        {% block heard_end_nav %}
+            <a class="navbar-brand plit-color">
+            {% if user.is_authenticated %}
+            {{ user.username }}
+            {% else %}
+                Гость
+            {% endif %}
+            </a>
+        {% endblock %}
+    </nav>
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="row">
+            {% block body %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+    $(function (){
+        $('.link').click(function (){
+            document.location.href = $(this).attr('data-url')
+        })
+    })
+</script>
+{% block scripts %}
+{% endblock %}
+</body>
+</html>
