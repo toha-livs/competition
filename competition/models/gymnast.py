@@ -27,6 +27,7 @@ class Gymnast(models.Model):
     team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, blank=True, related_name='gymnasts')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='gymnasts')
     level = models.IntegerField('Розряд', choices=LevelChoice.choices)
+    base_score = models.IntegerField('Общая база', null=True, blank=True)
     score = models.FloatField('Результат', null=True, blank=True)
 
     def __str__(self):
@@ -34,6 +35,13 @@ class Gymnast(models.Model):
 
     def calculate(self, set_attr=True):
         result = sum([result.result for result in self.results.all() if result.result])
+        if set_attr:
+            self.score = result
+            self.save()
+        return result
+
+    def calculate_base(self, set_attr=True):
+        result = sum([result.mark_e.e_value for result in self.results.all() if hasattr(result, 'mark_e')])
         if set_attr:
             self.score = result
             self.save()

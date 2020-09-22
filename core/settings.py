@@ -37,9 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'common',
     'competition',
     'user',
+    'judge',
+    'result',
+
     'nested_admin',
 ]
 
@@ -85,6 +89,8 @@ DATABASES = {
     }
 }
 
+
+LOGIN_URL = 'auth/login/'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

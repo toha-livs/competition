@@ -13,7 +13,12 @@ class JudgeTypeChoice(models.IntegerChoices):
 
 
 class Judge(models.Model):
-    competition = models.ForeignKey(SubCompetition, on_delete=models.CASCADE, related_name='judges')
+    competition = models.ForeignKey(
+        SubCompetition,
+        on_delete=models.CASCADE,
+        related_name='judges',
+        related_query_name='judges'
+    )
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='judges')
     apparatus = models.IntegerField('Снараяд', choices=ApparatusChoices.choices)
     judge_type = models.IntegerField('Тип судейства', choices=JudgeTypeChoice.choices)

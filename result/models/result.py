@@ -7,7 +7,7 @@ from django.db.models import Avg
 from common.models import BaseDateTimeModel
 from competition.choices.apparatus import ApparatusChoices
 from competition.models.gymnast import Gymnast
-from competition.models.judge import Judge
+from judge.models.judge import Judge
 
 User = get_user_model()
 

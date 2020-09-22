@@ -1,7 +1,7 @@
 from django import forms
 
-from competition.models import MarkD, MarkE, Judge
-from competition.models.judge import JudgeTypeChoice
+from judge.models.judge import JudgeTypeChoice, Judge
+from result.models import MarkD, MarkE
 
 
 class MarkDForm(forms.ModelForm):

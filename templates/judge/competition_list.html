@@ -1,0 +1,7 @@
+{% extends 'common/base.html' %}
+
+{% block body %}
+{% for competition in competitions %}
+    <a href="{% url 'judge:apparatus-list' competition.pk %}">{{ competition }}</a>
+{% endfor %}
+{% endblock %}

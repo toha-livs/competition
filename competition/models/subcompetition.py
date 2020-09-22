@@ -47,6 +47,7 @@ class Competition(BaseNameModel, models.Model):
 class SubCompetition(BaseNameModel, models.Model):
     competition = models.ForeignKey(Competition, on_delete=models.CASCADE, related_name='subs')
     date = models.DateField('Дата проведения')
+    active = models.BooleanField('Активны', default=False)
 
     def __str__(self):
         return f'{self.competition.competition_scope.name} | {self.competition.name} | {self.name}'

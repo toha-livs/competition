@@ -1,0 +1,7 @@
+{% extends 'common/base.html' %}
+
+{% block body %}
+{% for  apparatus in apparatuses %}
+    <a href="{% url 'judge:apparatus' apparatus.pk %}">{{ apparatus.get_apparatus_display }}</a>
+{% endfor %}
+{% endblock %}

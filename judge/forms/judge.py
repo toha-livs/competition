@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
-from competition.models import Judge
+from judge.models import Judge
 from user.choices.user_type import UserType
 
 User = get_user_model()
