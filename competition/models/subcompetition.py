@@ -1,11 +1,17 @@
+from django.apps import apps
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.functional import cached_property
 
 from common.models import BaseNameModel
+from competition.choices.apparatus import ApparatusChoices
 from competition.choices.calculate_mark import CalculateMarkTypeChoices
+from competition.choices.sex import SexChoices
 from competition.choices.sub_competition_type import SubCompetitionTypeChoices
 from competition.choices.competition_type import CompetitionTypeChoices
 from competition.choices.level import Level
+
+User = get_user_model()
 
 
 class CompetitionScope(BaseNameModel, models.Model):
@@ -46,8 +52,15 @@ class Competition(BaseNameModel, models.Model):
 
 class SubCompetition(BaseNameModel, models.Model):
     competition = models.ForeignKey(Competition, on_delete=models.CASCADE, related_name='subs')
-    date = models.DateField('Дата проведения')
+    date = models.DateTimeField('Дата проведения', null=True)
     active = models.BooleanField('Активны', default=False)
+    supervisor = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='super_competitions'
+    )
 
     def __str__(self):
         return f'{self.competition.competition_scope.name} | {self.competition.name} | {self.name}'
@@ -59,7 +72,51 @@ class SubCompetition(BaseNameModel, models.Model):
 
 class SubCompetitionManager(models.Model):
     sub_competition = models.OneToOneField(SubCompetition, on_delete=models.CASCADE, related_name='manager')
+    sex = models.IntegerField('Пол', choices=SexChoices.choices, default=SexChoices.MALE)
     rotation = models.IntegerField('Ротейшен', default=0)
+
+    @property
+    def base_apparatus_count(self):
+        count = 4 if self.sex == SexChoices.FEMALE else 6
+        count += self.sub_competition.settings.day_off
+        return count
+
+    def get_team(self, judge):
+        current_apparatus = (judge.apparatus + self.rotation - 1) % self.base_apparatus_count
+        return self.sub_competition.teams.filter(start_apparatus=current_apparatus).first()
+
+    def set_temp_teams(self):
+        self.set_temp_managers()
+        for team in self.sub_competition.teams.all():
+            team.set_temp_judges_brigade(manager=self)
+
+    def set_temp_managers(self):
+        temp_judge_brigade_manager_model = apps.get_model(app_label='competition', model_name='TempJudgeBrigadeManager')
+        for apparatus in range(1, self.base_apparatus_count + 1):
+            temp, created = temp_judge_brigade_manager_model.objects.get_or_create(
+                sub_competition=self.sub_competition,
+                apparatus=apparatus
+            )
+            if created is False:
+                temp.temp_team = None
+                temp.temp_gymnast = None
+                temp.save()
+
+    @property
+    def settings(self):
+        return self.sub_competition.settings
+
+    @property
+    def max_rotations(self):
+        return self.base_apparatus_count + self.settings.day_off
+
+    def rotate(self, rotation=None):
+        if rotation is None:
+            rotation = 0
+            self.set_temp_managers()
+        self.rotation = rotation
+        self.save()
+        self.set_temp_teams()
 
     class Meta:
         verbose_name = 'Соревнование (Менеджер)'

@@ -1,0 +1,42 @@
+{% extends 'common/base.html' %}
+
+{% block body %}
+    <div class="col-12">
+        <div class="row">
+            <select id="current-gymnast">
+                <option value="">Гимнаст не выбран</option>
+                {% for gymnast in temp.temp_team.gymnasts.all %}
+                    <option value="{{ gymnast.id }}" {% if gymnast == temp.temp_gymnast %}selected{% endif %}>
+                        {{ gymnast.get_competition_name }}
+                    </option>
+                {% endfor %}
+            </select>
+        <button onclick="selectGymnast()">Выбрать гимнаста</button>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+    {{ block.super }}
+    <script type="text/javascript">
+        function selectGymnast(){
+            let gymnast = $('#current-gymnast').val()
+            $.post('{% url "judge:apparatus-e-set-gymnast" judge.id %}', JSON.stringify({'gymnast_id': gymnast}), function(data){
+                if (data.status != 200) {
+                    alert('Ошибка')
+                } else {
+                    alert('Гимнаст изменен')
+                }
+            })
+        }
+        $(document).ready(function(){
+            setInterval(function(){
+                $.get('{% url "judge:apparatus-e-result" judge.id %}', function(data){
+                    console.log(data)
+                })
+            }, 5000)
+        })
+    </script>
+{% endblock %}

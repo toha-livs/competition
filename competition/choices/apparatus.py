@@ -1,16 +1,28 @@
 from django.db.models import IntegerChoices
 
+from competition.choices.sex import SexChoices
+
 
 class ApparatusChoices(IntegerChoices):
-    FXW = 0, 'Вольные упражнения (Ж)'
     FXM = 1, 'Вольные упражнения (М)'
-    VTW = 2, 'Опорный прыжок (Ж)'
-    VTM = 3, 'Опорный прыжок (М)'
-    PH = 4, 'Конь'
-    RINGS = 5, 'Кольца'
-    PB = 6, 'Паралельные брусья'
-    HB = 7, 'Перекладина'
-    UB = 8, 'Разновысокие брусья'
-    BB = 9, 'Бревно'
-    DAY_OFF = 10, 'Выходной'
-    DAY_OFF2 = 11, 'Выходной 2'
+    PH = 2, 'Конь'
+    RINGS = 3, 'Кольца'
+    VTM = 4, 'Опорный прыжок (М)'
+    PB = 5, 'Паралельные брусья'
+    HB = 6, 'Перекладина'
+    DAY_OFF_M = 7, 'Выходной'
+    DAY_OFF2_M = 8, 'Выходной 2'
+
+    FXW = 11, 'Вольные упражнения (Ж)'
+    BB = 12, 'Бревно'
+    UB = 13, 'Разновысокие брусья'
+    VTW = 14, 'Опорный прыжок (Ж)'
+    DAY_OFF_W = 15, 'Выходной'
+    DAY_OFF2_W = 16, 'Выходной 2'
+
+    @classmethod
+    def get_competition_choices(cls, sub_competition):
+        if sub_competition.manager.sex == SexChoices.FEMALE:
+            return list(filter(lambda x: x[0] > 10, cls.choices))
+        else:
+            return list(filter(lambda x: x[0] < 10, cls.choices))

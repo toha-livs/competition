@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.db import models
 from django.utils.functional import cached_property
 
@@ -37,6 +38,18 @@ class Team(BaseNameModel, models.Model):
             self.base_score = result
             self.save()
         return result
+
+    def set_temp_judges_brigade(self, manager):
+        temp_judge_brigade_manager_model = apps.get_model(app_label='competition', model_name='TempJudgeBrigadeManager')
+        apparatus = self.start_apparatus + manager.rotation
+        if apparatus > manager.max_rotations:
+            apparatus %= manager.max_rotations
+        if temp := temp_judge_brigade_manager_model.objects.filter(
+            sub_competition=manager.sub_competition,
+            apparatus=apparatus
+        ).first():
+            temp.temp_team = self
+            temp.save()
 
     class Meta:
         verbose_name = 'Команда'

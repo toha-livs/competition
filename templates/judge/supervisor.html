@@ -1,0 +1,58 @@
+{% extends 'common/base.html' %}
+
+{% block body %}
+    <div class="col-12 p-4 text-center text-white h4">
+        <b>{{ competition.competition.competition_scope.name }}</b>
+        <br>
+        <small>{{ competition.competition.name }} - {{ competition.name}}</small>
+    </div>
+    <div class="col-12 text-center my-4">
+    <form method="post">
+        {% csrf_token %}
+        {% if competition.active %}
+            <input name="action" value="finish" hidden="hidden">
+            <button type="submit" class="btn btn-lg btn-danger">Закончить</button>
+        {% else %}
+            <input name="action" value="start" hidden="hidden">
+            <button type="submit" class="btn btn-lg btn-success">Начать</button>
+        {% endif %}
+    </form>
+    </div>
+    <div class="col-12 text-center mt-3 h2 bg-white p-3 shadow" style="color:#2b7386;">
+        уже <b>{{ competition.manager.rotation|add:'1' }}</b> снаряд
+    </div>
+    <div class="col-12 fixed-bottom mb-4">
+        <div class="row">
+            <div class="col-6 col-lg-3 col-md-3 text-center">
+                <form method="post">
+                    {% csrf_token %}
+                    <input name="rotation" value="{{ competition.manager.rotation|add:"-1" }}" hidden="hidden">
+                    <button type="submit" class="btn">
+                        <span class="badge badge-light shadow">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+width="50" height="50"
+viewBox="0 0 172 172"
+style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g><path d="M2.65391,86c0,-46.02344 37.32266,-83.34609 83.34609,-83.34609c46.02344,0 83.34609,37.32266 83.34609,83.34609c0,46.02344 -37.32266,83.34609 -83.34609,83.34609c-46.02344,0 -83.34609,-37.32266 -83.34609,-83.34609z" fill="#57c3dd"></path><path d="M132.89688,75.85469c-21.86953,0 -43.77266,0 -65.64219,0c3.89687,-3.89687 7.79375,-7.79375 11.69062,-11.69062c9.00312,-9.00313 -5.00547,-22.91094 -14.04219,-13.87422c-9.50703,9.50703 -19.01406,19.01406 -28.52109,28.52109c-3.82969,3.82969 -3.72891,10.17891 0.06719,13.94141c9.50703,9.50703 19.01406,19.01406 28.52109,28.52109c9.00313,9.00313 22.91094,-5.00547 13.87422,-14.04219c-3.86328,-3.86328 -7.76016,-7.76016 -11.62344,-11.62344c21.83594,0 43.67188,0 65.50781,0c12.76563,0 12.86641,-19.75312 0.16797,-19.75312z" fill="#ffffff"></path></g></g></svg>
+{#                            Предведущий снаряд#}
+                        </span>
+                    </button>
+                </form>
+            </div>
+            <div class="col-6 col-lg-3 col-md-3 offset-md-6 offset-lg-6 text-center">
+                <form method="post">
+                    {% csrf_token %}
+                    <input name="rotation" value="{{ competition.manager.rotation|add:"1" }}" hidden="hidden">
+                    <button type="submit" class="btn">
+                        <span class="badge badge-light shadow">
+{#                            следующий снаряд#}
+                           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+width="50" height="50"
+viewBox="0 0 172 172"
+style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g><path d="M2.65391,86c0,-46.02344 37.32266,-83.34609 83.34609,-83.34609c46.02344,0 83.34609,37.32266 83.34609,83.34609c0,46.02344 -37.32266,83.34609 -83.34609,83.34609c-46.02344,0 -83.34609,-37.32266 -83.34609,-83.34609z" fill="#57c3dd"></path><path d="M138.03672,78.71016c-9.50703,-9.50703 -19.01406,-19.01406 -28.52109,-28.52109c-9.00312,-9.00312 -22.91094,5.00547 -13.87422,14.04219c3.86328,3.86328 7.76016,7.76016 11.62344,11.62344c-21.83594,0 -43.67187,0 -65.50781,0c-12.73203,0 -12.86641,19.75312 -0.13438,19.75312c21.86953,0 43.77266,0 65.64219,0c-3.89687,3.89688 -7.79375,7.79375 -11.69062,11.69062c-9.00312,9.00313 5.00547,22.91094 14.04219,13.87422c9.50703,-9.50703 19.01406,-19.01406 28.52109,-28.52109c3.79609,-3.79609 3.69531,-10.14531 -0.10078,-13.94141z" fill="#ffffff"></path></g></g></svg>
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

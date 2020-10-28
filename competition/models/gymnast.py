@@ -29,9 +29,13 @@ class Gymnast(models.Model):
     level = models.IntegerField('Розряд', choices=LevelChoice.choices)
     base_score = models.IntegerField('Общая база', null=True, blank=True)
     score = models.FloatField('Результат', null=True, blank=True)
+    number = models.IntegerField('Номер', blank=True, null=True)
 
     def __str__(self):
         return f'{self.user.username}'
+
+    def get_competition_name(self):
+        return f'{self.user.username} ({self.number})'
 
     def calculate(self, set_attr=True):
         result = sum([result.result for result in self.results.all() if result.result])

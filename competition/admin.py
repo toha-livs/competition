@@ -56,7 +56,7 @@ class GymnastInline(admin.TabularInline):
 
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
-    list_display = 'name', 'competition',
+    list_display = 'name', 'competition', 'start_apparatus',
     inlines = GymnastInline,
 
 

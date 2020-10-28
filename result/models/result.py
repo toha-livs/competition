@@ -33,6 +33,7 @@ class Result(models.Model):
 
 
 class Comment(models.Model):
+    result = models.ForeignKey(Result, on_delete=models.CASCADE, related_name='comments', related_query_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
     text = models.TextField('Комментарий')
     create_dt = models.DateTimeField('Дата создания', auto_now_add=True)
@@ -45,7 +46,7 @@ class Comment(models.Model):
 class MarkE(BaseDateTimeModel, models.Model):
     result = models.OneToOneField(Result, on_delete=models.CASCADE, related_name='mark_e')
     judge = models.ForeignKey(Judge, on_delete=models.SET_NULL, null=True, blank=True, related_name='marks_e')
-    e_value = models.FloatField('Оценка')
+    e_value = models.FloatField('Оценка', null=True)
     base_value = models.FloatField('Судейство с', default=10.0)
     comment = models.TextField('Комментарий', null=True, blank=True)
 
@@ -75,7 +76,7 @@ class MarkDManager(models.Manager):
 class MarkD(BaseDateTimeModel, models.Model):
     result = models.ForeignKey(Result, on_delete=models.CASCADE, related_name='marks_d')
     judge = models.ForeignKey(Judge, on_delete=models.SET_NULL, null=True, blank=True, related_name='marks_d')
-    value = models.FloatField('Оценка')
+    value = models.FloatField('Оценка', null=True)
     comment = models.TextField('Комментарий', null=True, blank=True)
 
     objects = MarkDManager()

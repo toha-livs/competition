@@ -1,5 +1,9 @@
+from django import apps
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models import Q
+from django.urls import reverse
+from django.utils.functional import cached_property
 
 from competition.choices.apparatus import ApparatusChoices
 from competition.models.subcompetition import SubCompetition
@@ -25,6 +29,23 @@ class Judge(models.Model):
 
     def __str__(self):
         return f'{self.user.username} ({self.get_apparatus_display()}:{self.get_judge_type_display()})'
+
+    @property
+    def url(self):
+        judge_type = 'd' if self.judge_type == JudgeTypeChoice.D else 'e'
+        return reverse(f'judge:apparatus-{judge_type}', args=[self.pk])
+
+
+    @cached_property
+    def comments_count(self):
+        result_model = apps.apps.get_model(app_label='result', model_name='Result')
+        comments = 0
+        for result in result_model.objects.filter(
+                Q(comments__isnull=False, marks_d__judge__user=self.user) |
+                Q(comments__isnull=False, mark_e__judge__user=self.user)
+        ):
+            comments += result.comments.count()
+        return comments
 
     class Meta:
         verbose_name = 'Судья'
