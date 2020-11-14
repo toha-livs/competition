@@ -3,17 +3,104 @@
 {% block body %}
     <div class="col-12">
         <div class="row">
-            <select id="current-gymnast">
-                <option value="">Гимнаст не выбран</option>
-                {% for gymnast in temp.temp_team.gymnasts.all %}
-                    <option value="{{ gymnast.id }}" {% if gymnast == temp.temp_gymnast %}selected{% endif %}>
-                        {{ gymnast.get_competition_name }}
-                    </option>
-                {% endfor %}
-            </select>
-        <button onclick="selectGymnast()">Выбрать гимнаста</button>
+        <div class="col-12 col-md-6 col-lg-6">
+            <div class="mrow">
+                <div class="col-12 text-center bg-light rounded p-2">
+                    <label for="current-gymnast" style="float: left">
+                        Гинаст на снаряде
+                    </label>
+                    <select id="current-gymnast" class="form-control">
+                        <option value="">Гимнаст не выбран</option>
+                        {% for gymnast in temp.temp_team.gymnasts.all %}
+                            <option value="{{ gymnast.id }}" {% if gymnast == temp.temp_gymnast %}selected{% endif %}>
+                                {{ gymnast.get_competition_name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <button class="btn btn-info mt-3" onclick="selectGymnast()">Выбрать гимнаста</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-6 mt-3">
+            <div class="mrow">
+                <div class="col-12 bg-warning text-center rounded">
+                    <span class="w-100 p-4" style="font-size: 30px;" id="score">
+                        {{ result.result }}
+                    </span>
+                </div>
+            </div>
+        </div>
         </div>
     </div>
+    <div class="col-12 col-lg-6 col-md-6 my-3">
+    <div class="mrow">
+        <div class="col-12 p-2 bg-light rounded">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="e-value">База</label>
+                    <input type="number" class="form-control" id="e-value" value="{{ mark_e.e_value }}">
+                    <small id="emailHelp" class="form-text text-muted">Оценка ставится десятичной дробью пример:
+                        4.6 </small>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="base-value">Судейство с</label>
+                    <input type="number" value="{{ mark_e.base_value }}" class="form-control" max="10" min="0" id="base-value">
+                    <small id="emailHelp" class="form-text text-muted">Оценка ставится десятичной дробью пример:
+                        10.0</small>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="comment">Комментарий</label>
+                    <textarea class="form-control" id="comment">{{ mark_e.comment }}</textarea>
+                </div>
+            </div>
+            <div class="col-12 text-center">
+                <button class="btn btn-lg btn-info" onclick="saveBase()">Сохранить</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-12 col-lg-6 col-md-6">
+        <div class="mrow" id="judge-d-result-list">
+            {% for mark in marks_d %}
+            <div class="col-12 p-3">
+                <div class="row">
+                    <div class="col-12 bg-light rounded p-3">
+                        <div class="row">
+                            <div class="col-6 text-center">{{ mark.judge.user.username }}</div>
+                            <div class="col-6 text-center"><b>{{ mark.value }}</b></div>
+                            <hr style="background-color: #3d9cb3; width: 95%;">
+                            <div class="col-12">
+                                <small>
+                                    {{ mark.comment }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% if judge_d %}
+    <div class="col-12 col-lg-6 col-md-6">
+        <div class="mrow">
+            <div class="col-12 bg-light rounded p-3 text-center">
+                <div class="form-group text-left">
+                  <label for="d_value">Судейство бригадой "E"</label>
+                  <input required type="number" id="d_value" class="form-control" placeholder="9.1">
+                  <small id="emailHelp" class="form-text text-muted">Поставьте оценку от 0 до 10.0 десятичной дробью</small>
+                </div>
+                <button onclick="sendDResult()" class="btn btn-lg btn-info">Сохранить</button>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
 {% endblock %}
 
@@ -21,20 +108,70 @@
 {% block scripts %}
     {{ block.super }}
     <script type="text/javascript">
-        function selectGymnast(){
+        function setResult(result){
+            let first_part = '<div class="col-12 p-3"><div class="row"><div class="col-12 bg-light rounded p-3">' +
+                        '<div class="row"><div class="col-6 text-center">'
+            let end_first_part = '</div>'
+            let second_row = '<div class="col-6 text-center"><b>'
+            let end_second_row = '</b></div>'
+            let hr = '<hr style="background-color: #3d9cb3; width: 95%;">'
+            let last_row = ' <div class="col-12"><small>'
+            let end_last_row = '</small></div></div></div></div></div>'
+            $('#judge-d-result-list').append(
+                first_part + result.judge + end_first_part + second_row + result.value + end_second_row +
+                hr + last_row + result.comment + end_last_row
+            )
+        }
+        {% if judge_d %}
+        function sendDResult() {
+            let d_value = $('#d_value').val()
+            if (d_value) {
+                $.post('{% url "judge:apparatus-d" judge_d.id %}', JSON.stringify({'value': d_value, 'comment': ''}), function (data){
+                    if (data.status == 200) {
+                        $('#d_value').css('border', '1px solid green')
+                    } else {
+                        console.log(data)
+                    }
+                })
+            } else {
+                alert('Сначала залоните поле')
+                $('#d_value').css('border', '1px solid red')
+            }
+        }
+        {% endif %}
+        function selectGymnast() {
             let gymnast = $('#current-gymnast').val()
-            $.post('{% url "judge:apparatus-e-set-gymnast" judge.id %}', JSON.stringify({'gymnast_id': gymnast}), function(data){
+            $.post('{% url "judge:apparatus-e-set-gymnast" judge.id %}', JSON.stringify({'gymnast_id': gymnast}), function (data) {
                 if (data.status != 200) {
                     alert('Ошибка')
                 } else {
                     alert('Гимнаст изменен')
+                    $('#e-value').val('')
+                    $('#base-value').val('10')
+                    $('#score').html('')
                 }
             })
         }
-        $(document).ready(function(){
-            setInterval(function(){
-                $.get('{% url "judge:apparatus-e-result" judge.id %}', function(data){
+        function saveBase(){
+            data = {
+                e_value: $('#e-value').val(),
+                base_value: $('#base-value').val(),
+                comment: $('#comment').val()
+            }
+            $.post('{% url "judge:apparatus-e" judge.id %}', data=JSON.stringify(data), function(data){
+                console.log(data)
+            })
+        }
+
+        $(document).ready(function () {
+            setInterval(function () {
+                $.get('{% url "judge:apparatus-e-result" judge.id %}', function (data) {
+                    $('#judge-d-result-list').html('')
                     console.log(data)
+                    $('#score').html(data.score)
+                    data.marks.forEach(function(elem, ind){
+                        setResult(elem)
+                    })
                 })
             }, 5000)
         })

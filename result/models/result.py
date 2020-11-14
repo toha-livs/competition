@@ -23,7 +23,9 @@ class Result(models.Model):
 
     def calculate(self, set_result=False):
         max_marks = self.gymnast.team.competition.settings.calculate_mark_type
-        base_mark = self.mark_e.value
+        base_mark = getattr(getattr(self, 'mark_e', None), 'value', None)
+        if not base_mark:
+            return 0
         decreases_marks = self.marks_d.get_avgs(max_marks=max_marks).aggregate(Avg('value'))
         result = base_mark - (10 - decreases_marks.get('value__avg', 0))
         if set_result:
