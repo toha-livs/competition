@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="col-12">
+        <table class="table">
+            <tbody>
+            <tr>
+                {% for col in columns %}
+                <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+            {% for row in results %}
+                <tr>
+                {% if row.info %}
+                <td>{{ row.info }}</td>
+                {% endif %}
+                {% for col in row.results %}
+                    <td>{{ col.result }}</td>
+                {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

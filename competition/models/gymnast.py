@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.utils.functional import cached_property
 
+from competition.choices.sex import SexChoices
 from competition.models.team import Team
 
 User = get_user_model()
@@ -11,8 +13,8 @@ class LevelChoice(models.IntegerChoices):
     JUNIOR2 = 1, 'Второй юнешеский'
     JUNIOR1 = 2, 'Первый юнешеский'
     ADULT3 = 3, 'Третий взрослый'
-    ADULT2 = 4, 'Второй юнешеский'
-    ADULT1 = 5, 'Превый юнешеский'
+    ADULT2 = 4, 'Второй взрослый'
+    ADULT1 = 5, 'Превый взрослый'
     KMS = 6, 'КМС'
     MS = 7, 'МС'
 
@@ -44,11 +46,29 @@ class Gymnast(models.Model):
             self.save()
         return result
 
+    def calculate_results(self):
+        for result in self.results.all():
+            result.calculate(set_result=True)
+
     def calculate_base(self, set_attr=True):
-        result = sum([result.mark_e.e_value for result in self.results.all() if hasattr(result, 'mark_e')])
+        result = sum([result.mark_e.e_value or 0 for result in self.results.all() if hasattr(result, 'mark_e')])
         if set_attr:
-            self.score = result
+            self.base_score = result
             self.save()
+        return result
+
+    @cached_property
+    def all_around_render(self):
+        if self.team.competition.manager.sex == SexChoices.MALE:
+            result = (
+                self.results.fxm(True), self.results.ph(True), self.results.rings(True),
+                self.results.vtm(True), self.results.pb(True), self.results.hb(True),
+            )
+        else:
+            result = (
+                self.results.fxw(True), self.results.ub(True),
+                self.results.bb(True), self.results.vtw(True),
+            )
         return result
 
     class Meta:

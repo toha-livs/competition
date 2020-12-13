@@ -24,6 +24,7 @@ from django.conf.urls.static import static
 from core.permissions import judge_check
 from .views import HomeView
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^_nested_admin/', include('nested_admin.urls')),

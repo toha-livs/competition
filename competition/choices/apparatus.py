@@ -21,8 +21,10 @@ class ApparatusChoices(IntegerChoices):
     DAY_OFF2_W = 16, 'Выходной 2'
 
     @classmethod
-    def get_competition_choices(cls, sub_competition):
+    def get_competition_choices(cls, sub_competition, day_off=True):
+        result = list(filter(lambda x: x[0] < 10, cls.choices))
         if sub_competition.manager.sex == SexChoices.FEMALE:
-            return list(filter(lambda x: x[0] > 10, cls.choices))
-        else:
-            return list(filter(lambda x: x[0] < 10, cls.choices))
+            result = list(filter(lambda x: x[0] > 10, cls.choices))
+        if day_off is False:
+            result = list(filter(lambda x: x[0] not in [15, 16, 7, 8], result))
+        return result

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="col-12">
+    <table class="table table-info table-bordered text-center">
+        <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Розряд</th>
+            {% if competition_sex == 1 %}
+                <th>ВУ</th>
+                <th>Конь</th>
+                <th>Кольца</th>
+                <th>ОП</th>
+                <th>ПП</th>
+                <th>Перекладина</th>
+            {% else %}
+                <th>ВУ</th>
+                <th>Бревно</th>
+                <th>РБ</th>
+                <th>ОП</th>
+            {% endif %}
+                <th>Всего</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for gymnast in result %}
+        <tr>
+            <td>{{ gymnast.get_competition_name }}</td>
+            <td>{{ gymnast.get_level_display }}</td>
+            <td>{{ gymnast.results.fxm.result|floatformat }}</td>
+            <td>{{ gymnast.results.ph.result|floatformat }}</td>
+            <td>{{ gymnast.results.rings.result|floatformat }}</td>
+            <td>{{ gymnast.results.vtm.result|floatformat }}</td>
+            <td>{{ gymnast.results.pb.result|floatformat }}</td>
+            <td>{{ gymnast.results.hb.result|floatformat }}</td>
+            <td>{{ gymnast.score|floatformat}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

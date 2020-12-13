@@ -45,6 +45,15 @@ class Competition(BaseNameModel, models.Model):
     def gymnast_count(self):
         return sum([sum([team.gymnasts.count() for team in sub.teams.all()]) for sub in self.subs.all()])
 
+    def calculate(self):
+        for sub in self.subs.all():
+            for team in sub.teams.all():
+                for gymnast in team.gymnasts.all():
+                    for result in gymnast.results.all():
+                        result.calculate(set_result=True)
+                    gymnast.calculate(set_attr=True)
+                    gymnast.calculate_base(set_attr=True)
+
     class Meta:
         verbose_name = 'Соревнование'
         verbose_name_plural = 'Соревнования'
@@ -61,6 +70,12 @@ class SubCompetition(BaseNameModel, models.Model):
         blank=True,
         related_name='super_competitions'
     )
+
+    def calculate(self):
+        for team in self.teams.all():
+            for gym in team.gymnasts.all():
+                gym.calculate(set_attr=True)
+                gym.calculate_base(set_attr=True)
 
     def __str__(self):
         return f'{self.competition.competition_scope.name} | {self.competition.name} | {self.name}'
@@ -109,6 +124,8 @@ class SubCompetitionManager(models.Model):
     @property
     def max_rotations(self):
         return self.base_apparatus_count + self.settings.day_off
+
+    # def
 
     def rotate(self, rotation=None):
         if rotation is None:

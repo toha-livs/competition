@@ -83,6 +83,8 @@ class SetTempGymnastView(BaseJudgeEView):
         if request.is_ajax():
             data = json.loads(request.body.decode('utf-8'))
             gymnast = get_object_or_404(Gymnast, pk=data.get('gymnast_id', None))
+            if self.temp.temp_gymnast:
+                self.temp.temp_gymnast.calculate_results()
             self.temp.temp_gymnast = gymnast
             self.temp.save()
             status = 200

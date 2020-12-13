@@ -6,6 +6,7 @@ from competition.models import (
     SubCompetition, Gymnast, SubCompetitionSettings, Team,
     Competition, CompetitionScope, SubCompetitionManager
 )
+from judge.models import Judge
 
 
 class SubCompetitionInline(NestedStackedInline):
@@ -33,10 +34,14 @@ class SubCompetitionManagerInline(admin.TabularInline):
     model = SubCompetitionManager
 
 
+class JudgeInline(admin.TabularInline):
+    model = Judge
+
+
 @admin.register(SubCompetition)
 class SubCompetitionAdmin(admin.ModelAdmin):
     list_display = 'scope_competition_name', 'competition_name', 'name',
-    inlines = SubCompetitionManagerInline, SubCompetitionSettingsInline,
+    inlines = SubCompetitionManagerInline, SubCompetitionSettingsInline, JudgeInline,
 
     def competition_name(self, obj):
         return obj.competition.name

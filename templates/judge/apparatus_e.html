@@ -1,5 +1,15 @@
 {% extends 'common/base.html' %}
 
+{% block header_back_button %}
+    <a class="navbar-brand plit-color" href="{% url 'judge:apparatus-list' judge.competition.pk %}">
+        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+        width="24" height="24"
+        viewBox="0 0 172 172"
+        style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#49a0ac"><path d="M71.15783,86l27.38383,-27.38383c2.967,-2.967 2.967,-7.783 0,-10.75v0c-2.967,-2.967 -7.783,-2.967 -10.75,0l-33.067,33.067c-2.80217,2.80217 -2.80217,7.33867 0,10.13367l33.067,33.067c2.967,2.967 7.783,2.967 10.75,0v0c2.967,-2.967 2.967,-7.783 0,-10.75z"></path></g></g></svg>
+        к списку
+    </a>
+{% endblock %}
+
 {% block body %}
     <div class="col-12">
         <div class="row">

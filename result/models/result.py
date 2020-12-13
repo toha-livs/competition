@@ -12,22 +12,90 @@ from judge.models.judge import Judge
 User = get_user_model()
 
 
+class ResultManager(models.Manager):
+
+    def fxm(self, one=True, **kwargs):
+        result = self.get_queryset(**kwargs).filter(apparatus=ApparatusChoices.FXM)
+        if one:
+            result = result.first()
+        return result
+
+    def ph(self, one=True, **kwargs):
+        result = self.get_queryset(**kwargs).filter(apparatus=ApparatusChoices.PH)
+        if one:
+            result = result.first()
+        return result
+
+    def rings(self, one=True, **kwargs):
+        result = self.get_queryset(**kwargs).filter(apparatus=ApparatusChoices.RINGS)
+        if one:
+            result = result.first()
+        return result
+
+    def vtm(self, one=True, **kwargs):
+        result = self.get_queryset(**kwargs).filter(apparatus=ApparatusChoices.VTM)
+        if one:
+            result = result.first()
+        return result
+
+    def pb(self, one=True, **kwargs):
+        result = self.get_queryset(**kwargs).filter(apparatus=ApparatusChoices.PB)
+        if one:
+            result = result.first()
+        return result
+
+    def hb(self, one=True, **kwargs):
+        result = self.get_queryset(**kwargs).filter(apparatus=ApparatusChoices.HB)
+        if one:
+            result = result.first()
+        return result
+
+    def fxw(self, one=True, **kwargs):
+        result = self.get_queryset(**kwargs).filter(apparatus=ApparatusChoices.FXW)
+        if one:
+            result = result.first()
+        return result
+
+    def ub(self, one=True, **kwargs):
+        result = self.get_queryset(**kwargs).filter(apparatus=ApparatusChoices.UB)
+        if one:
+            result = result.first()
+        return result
+
+    def bb(self, one=True, **kwargs):
+        result = self.get_queryset(**kwargs).filter(apparatus=ApparatusChoices.BB)
+        if one:
+            result = result.first()
+        return result
+
+    def vtw(self, one=True, **kwargs):
+        result = self.get_queryset(**kwargs).filter(apparatus=ApparatusChoices.VTW)
+        if one:
+            result = result.first()
+        return result
+
+
 class Result(models.Model):
     apparatus = models.IntegerField('Снаряд', choices=ApparatusChoices.choices)
     gymnast = models.ForeignKey(Gymnast, on_delete=models.CASCADE, related_name='results')
     result = models.FloatField('Результат', null=True, blank=True)
 
+    objects = ResultManager()
+
     class Meta:
         verbose_name = 'Результат'
         verbose_name_plural = 'Результаты'
+        unique_together = [['apparatus', 'gymnast']]
 
-    def calculate(self, set_result=False):
+    def calculate(self, set_result=True):
         max_marks = self.gymnast.team.competition.settings.calculate_mark_type
-        base_mark = getattr(getattr(self, 'mark_e', None), 'value', None)
-        if not base_mark:
-            return 0
-        decreases_marks = self.marks_d.get_avgs(max_marks=max_marks).aggregate(Avg('value'))
-        result = base_mark - (10 - decreases_marks.get('value__avg', 0))
+        result = 0
+        base_mark = 0
+        if hasattr(self, 'mark_e'):
+            base_mark = (self.mark_e.e_value or 0) + (self.mark_e.base_value or 0)
+        decreases_marks = self.marks_d.get_avgs(max_marks=max_marks).aggregate(Avg('value')).get('value__avg') or 0
+        if base_mark > (10 - decreases_marks):
+            result = base_mark - (10 - decreases_marks)
         if set_result:
             self.result = result
             self.save()
@@ -54,7 +122,7 @@ class MarkE(BaseDateTimeModel, models.Model):
 
     @property
     def value(self):
-        return self.base_value + self.e_value
+        return self.base_value or 0 + self.e_value or 0
 
     class Meta:
         verbose_name = 'Оценка E'
