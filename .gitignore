@@ -237,3 +237,4 @@ local_settings.py
 !**/migrations/__init__.py
 
 test_file.py
+.env
