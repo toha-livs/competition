@@ -2,18 +2,20 @@
 
 {% block body %}
 <div class="col-12">
-    <table class="table table-info table-bordered text-center">
+    <table class="table table-info table-bordered text-center shadow">
         <thead>
         <tr>
             <th>Имя</th>
             <th>Розряд</th>
+            <th>Город</th>
+            <th>Год</th>
             {% if competition_sex == 1 %}
                 <th>ВУ</th>
                 <th>Конь</th>
                 <th>Кольца</th>
                 <th>ОП</th>
                 <th>ПП</th>
-                <th>Перекладина</th>
+                <th>ВП</th>
             {% else %}
                 <th>ВУ</th>
                 <th>Бревно</th>
@@ -28,6 +30,8 @@
         <tr>
             <td>{{ gymnast.get_competition_name }}</td>
             <td>{{ gymnast.get_level_display }}</td>
+            <td>{{ gymnast.city }}</td>
+            <td>{{ gymnast.user.ext.birthday_date|date:'Y' }}</td>
             <td>{{ gymnast.results.fxm.result|floatformat }}</td>
             <td>{{ gymnast.results.ph.result|floatformat }}</td>
             <td>{{ gymnast.results.rings.result|floatformat }}</td>

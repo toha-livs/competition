@@ -7,7 +7,9 @@ from competition.models import CompetitionScope, Gymnast
 
 class CompetitionScopeListView(ListView):
     model = CompetitionScope
-    queryset = CompetitionScope.objects.filter(date_start__lte=timezone.localdate())
+    queryset = CompetitionScope.objects.filter(
+        date_start__lte=timezone.localdate() + timezone.timedelta(days=30)
+    )
     template_name = 'competition/competition_scope_list.html'
     context_object_name = 'competitions'
     ordering = '-date_start'

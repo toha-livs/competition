@@ -1,12 +1,19 @@
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, RedirectView
 
 from competition.choices.competition_type import CompetitionTypeChoices
 from competition.models import Competition, Team
 
 
-class CompetitionListView(ListView):
+class CompetitionListView(RedirectView):
+
+    def get_redirect_url(self, *args, **kwargs):
+        competition = Competition.objects.filter(competition_scope_id=self.kwargs.get('scope_id')).first()
+        return reverse('result:all_around', args=[competition.pk])
+
+
+class _CompetitionListView(ListView):
     template_name = 'competition/competition_list.html'
     context_object_name = 'competitions'
     model = Competition

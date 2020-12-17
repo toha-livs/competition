@@ -20,10 +20,5 @@ class CompetitionResultAllAround(TemplateView):
             team__competition__competition=competition
         # ).order_by('team', 'number')
         ).order_by('level', '-score')
-        for gym in context['result']:
-            print(getattr(gym.results.fxm(), 'result', None))
-            # if gym.results.fxm():
-                # gym.results.fxm().calculate()
-                # print(gym.results.fxm().result)
         return context
 

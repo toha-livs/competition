@@ -29,6 +29,8 @@ class Gymnast(models.Model):
     team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, blank=True, related_name='gymnasts')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='gymnasts')
     level = models.IntegerField('Розряд', choices=LevelChoice.choices)
+    city = models.CharField("Город", max_length=255, null=True, blank=True)
+    coach = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='coach_gymnasts')
     base_score = models.IntegerField('Общая база', null=True, blank=True)
     score = models.FloatField('Результат', null=True, blank=True)
     number = models.IntegerField('Номер', blank=True, null=True)
