@@ -20,8 +20,8 @@ class CompetitionScope(BaseNameModel, models.Model):
     date_end = models.DateField('Дата окончания', null=True, blank=True)
 
     class Meta:
-        verbose_name = 'Соревнование'
-        verbose_name_plural = 'Соревнование'
+        verbose_name = 'Мероприятие'
+        verbose_name_plural = 'Мероприятия'
 
     @property
     def date_render(self):
@@ -81,8 +81,8 @@ class SubCompetition(BaseNameModel, models.Model):
         return f'{self.competition.competition_scope.name} | {self.competition.name} | {self.name}'
 
     class Meta:
-        verbose_name = 'Под Соревнование'
-        verbose_name_plural = 'Под Соревнования'
+        verbose_name = 'Поток'
+        verbose_name_plural = 'Потоки'
 
 
 class SubCompetitionManager(models.Model):
@@ -136,8 +136,8 @@ class SubCompetitionManager(models.Model):
         self.set_temp_teams()
 
     class Meta:
-        verbose_name = 'Соревнование (Менеджер)'
-        verbose_name_plural = 'Соревнования (Менеджер)'
+        verbose_name = 'Поток (Менеджер)'
+        verbose_name_plural = 'Потоки (Менеджер)'
 
 
 class SubCompetitionSettings(models.Model):
@@ -155,5 +155,5 @@ class SubCompetitionSettings(models.Model):
     )
 
     class Meta:
-        verbose_name = 'Настройки соревнований'
-        verbose_name_plural = 'Настройки соревнований'
+        verbose_name = 'Настройки потока'
+        verbose_name_plural = 'Настройки потоков'

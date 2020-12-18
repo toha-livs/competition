@@ -23,3 +23,5 @@ class UserExtension(models.Model):
         default=RenderType.BEAUTIFUL
     )
 
+    def get_full_name(self):
+        return f'{self.last_name or ""} {self.first_name or ""} {self.middle_name or ""}'

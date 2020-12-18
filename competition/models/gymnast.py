@@ -39,7 +39,8 @@ class Gymnast(models.Model):
         return f'{self.user.username}'
 
     def get_competition_name(self):
-        return f'{self.user.username} ({self.number})'
+        number = f'({self.number})' if self.number else ''
+        return f'{self.user.ext.get_full_name()} {number}'
 
     def calculate(self, set_attr=True):
         result = sum([result.result for result in self.results.all() if result.result])
