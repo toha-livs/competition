@@ -1,7 +1,7 @@
 from django.views.generic import ListView
 from competition.models import Competition, Gymnast
 from django.shortcuts import get_object_or_404
-
+from django_user_agents.utils import get_user_agent
 from competition.models.gymnast import LevelChoice
 
 
@@ -52,6 +52,8 @@ class CompetitionResultAllAround(ListView):
         context['competition'] = self.competition
         context['competition_sex'] = self.competition.subs.last().manager.sex
         context['mobile'] = True
+        context['user_agent'] = get_user_agent(self.request)
+        # if self.kwargs
         context['filters'] = [
             {
                 'title': 'Команда',
