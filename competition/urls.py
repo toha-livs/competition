@@ -4,6 +4,7 @@ from .views import (
     CompetitionScopeListView, CompetitionListView,
     ExpectedCompetitionScopeListView, CompetitionDetailView,
 )
+from .views.autocomplete import GymnastAutocomplete
 
 app_name = 'competition'
 
@@ -14,4 +15,5 @@ urlpatterns = [
     path('<int:scope_id>/competition-list/', CompetitionListView.as_view(), name='competition-list'),
     path('competition/<int:competition_id>/', CompetitionDetailView.as_view(), name='competition-detail'),
 
+    path('gymnast-autocomplete/', GymnastAutocomplete.as_view(), name='gymnast-autocomplete')
 ]

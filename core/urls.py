@@ -32,5 +32,8 @@ urlpatterns = [
     path('result/', include('result.urls', namespace='result')),
     path('judge/', decorator_include([login_required, judge_check()], 'judge.urls', namespace='judge')),
     path('auth/', include('registration.urls', namespace='registration')),
+
+    path('select2/', include('django_select2.urls')),
+
     path('', HomeView.as_view(), name='home'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
