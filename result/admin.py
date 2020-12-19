@@ -70,3 +70,7 @@ class ResultAdmin(admin.ModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
         request._obj_ = obj
         return super().get_form(request, obj, **kwargs)
+
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        obj.calculate()
