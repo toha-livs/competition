@@ -60,6 +60,9 @@
             document.location.href = $(this).attr('data-url')
         })
     })
+    function toggleElement(elem_id){
+        $('#' + elem_id).toggle('fast')
+    }
 </script>
 {% block scripts %}
 {% endblock %}

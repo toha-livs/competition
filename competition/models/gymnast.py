@@ -9,20 +9,20 @@ User = get_user_model()
 
 
 class LevelChoice(models.IntegerChoices):
-    JUNIOR3 = 0, 'Третий юнешеский'
-    JUNIOR2 = 1, 'Второй юнешеский'
-    JUNIOR1 = 2, 'Первый юнешеский'
-    ADULT3 = 3, 'Третий взрослый'
-    ADULT2 = 4, 'Второй взрослый'
-    ADULT1 = 5, 'Превый взрослый'
+    JUNIOR3 = 0, 'III юношеский'
+    JUNIOR2 = 1, 'II юношеский'
+    JUNIOR1 = 2, 'I юношеский'
+    ADULT3 = 3, 'III взрослый'
+    ADULT2 = 4, 'II взрослый'
+    ADULT1 = 5, 'I взрослый'
     KMS = 6, 'КМС'
     MS = 7, 'МС'
 
-    JUNIOR2FREE = 8, 'Второй юнешеский (Произвольный)'
-    JUNIOR1FREE = 9, 'Первый юнешеский (Произвольный)'
-    ADULT3FREE = 10, 'Третий взрослый (Произвольный)'
-    ADULT2FREE = 11, 'Второй юнешеский (Произвольный)'
-    ADULT1FREE = 12, 'Превый юнешеский (Произвольный)'
+    JUNIOR2FREE = 8, 'II юношеский (Произвольный)'
+    JUNIOR1FREE = 9, 'I юношеский (Произвольный)'
+    ADULT3FREE = 10, 'III взрослый (Произвольный)'
+    ADULT2FREE = 11, 'II взрослый (Произвольный)'
+    ADULT1FREE = 12, 'I взрослый (Произвольный)'
 
 
 class Gymnast(models.Model):
