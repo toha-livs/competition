@@ -1,7 +1,4 @@
 from django.views.generic import ListView
-from django.views.generic.base import TemplateView
-
-from competition.choices.apparatus import ApparatusChoices
 from competition.models import Competition, Gymnast
 from django.shortcuts import get_object_or_404
 
@@ -12,7 +9,7 @@ class CompetitionResultAllAround(ListView):
     template_name = 'result/all_around.html'
     queryset = Gymnast.objects.none()
 
-    paginate_by = 5
+    paginate_by = 10
 
     filtering = {
         'team': 'team_id',
@@ -52,7 +49,6 @@ class CompetitionResultAllAround(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs) or dict()
-        context['result'] = self.object_list
         context['competition'] = self.competition
         context['competition_sex'] = self.competition.subs.last().manager.sex
         context['mobile'] = True
