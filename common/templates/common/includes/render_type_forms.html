@@ -1,0 +1,10 @@
+<form id="form-render-type-table" style="display: none;" method="post" action="{% url 'render-type' %}">
+    {% csrf_token %}
+    <input hidden="hidden" name="redirect_url" value="{{request.get_full_path}}">
+    <input name="render_type" value="table">
+</form>
+<form id="form-render-type-list" style="display: none;" method="post" action="{% url 'render-type' %}">
+    {% csrf_token %}
+    <input hidden="hidden" name="redirect_url" value="{{request.get_full_path}}">
+    <input name="render_type" value="list">
+</form>

@@ -1,3 +1,5 @@
+import json
+
 from django.views.generic import ListView
 from competition.models import Competition, Gymnast
 from django.shortcuts import get_object_or_404
@@ -33,9 +35,11 @@ class CompetitionResultAllAround(ListView):
 
     def get_filtering(self, queryset):
         filter_kwargs = dict()
+        get_params = {key: val for key, val in self.request.GET.items() if val}
+        self.get_params = get_params
         for _filter in self.filtering:
-            if _filter in self.request.GET:
-                filter_kwargs[self.filtering[_filter]] = self.request.GET.get(_filter)
+            if _filter in get_params:
+                filter_kwargs[self.filtering[_filter]] = get_params[_filter]
         return queryset.filter(**filter_kwargs)
 
     def get_queryset(self):
@@ -51,7 +55,8 @@ class CompetitionResultAllAround(ListView):
         context = super().get_context_data(**kwargs) or dict()
         context['competition'] = self.competition
         context['competition_sex'] = self.competition.subs.last().manager.sex
-        context['mobile'] = True
+        context['get_params'] = str(self.get_params).replace("'", '"')
+        # print(context['json_get_params'])
         context['user_agent'] = get_user_agent(self.request)
         # if self.kwargs
         context['filters'] = [
@@ -61,7 +66,7 @@ class CompetitionResultAllAround(ListView):
                 'choices': tuple([(team.pk, team.name) for team in self.get_teams()])
             },
             {
-                'title': 'Год рождения',
+                'title': 'Год',
                 'field_name': 'year',
                 'choices': tuple([(int(year), year) for year in self.get_years()])
             },

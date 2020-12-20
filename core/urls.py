@@ -22,12 +22,12 @@ from django.urls import path, include
 from django.conf.urls.static import static
 
 from core.permissions import judge_check
-from .views import HomeView
-
+from .views import HomeView, render_type_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^_nested_admin/', include('nested_admin.urls')),
+    path('render-type/', render_type_view, name='render-type'),
     path('competitions/', include('competition.urls', namespace='competition')),
     path('result/', include('result.urls', namespace='result')),
     path('judge/', decorator_include([login_required, judge_check()], 'judge.urls', namespace='judge')),
